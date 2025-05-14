@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block title %}Login - Void Nodes Server Panel{% endblock %}
+
+{% block head_extra %} {# Add page-specific styles here #}
+<style>
+    .login-stats .progress {
+        height: 1.25rem; /* Make progress bars a bit thicker */
+        font-size: 0.8rem; /* Smaller font for text inside progress bar */
+        border-radius: var(--border-radius-sm); /* Consistent rounding */
+    }
+    .login-stats .progress-bar {
+        transition: width 0.6s ease; /* Animate width change */
+        font-weight: 500;
+    }
+
+    /* Custom progress bar colors based on theme */
+    /* Light Mode: Black progress bar */
+    html[data-bs-theme="light"] .login-stats .progress-bar.bg-theme-specific {
+        background-color: #000000 !important; /* Black */
+        color: #ffffff; /* White text */
+    }
+    html[data-bs-theme="light"] .login-stats .progress {
+        background-color: #e9ecef; /* Lighter background for progress track */
+    }
+
+
+    /* Dark Mode: Blue (or purple) progress bar */
+    html[data-bs-theme="dark"] .login-stats .progress-bar.bg-theme-specific {
+        background-color: #0d6efd !important; /* Bootstrap Primary Blue */
+        /* Or use a purple: background-color: #6f42c1 !important; */
+        color: #ffffff; /* White text */
+    }
+     html[data-bs-theme="dark"] .login-stats .progress {
+        background-color: #343a40; /* Darker background for progress track */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-lg-5 pt-lg-4"> {# Adjusted top margin for larger screens #}
+    <div class="col-md-7 col-lg-5 col-xl-4">
+        <div class="card shadow-lg">
+            <div class="card-header text-center h4">
+                <i class="fas fa-server me-2"></i>Void Nodes Panel Login
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('login', next=request.args.get('next')) }}">
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <input type="password" class="form-control form-control-lg" id="password" name="password" required autofocus>
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-arrow-right-to-bracket me-2"></i>Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {# Server Stats Section #}
+        <div class="card shadow-sm mt-4 login-stats">
+            <div class="card-body p-3">
+                <h6 class="card-subtitle mb-2 text-muted text-center small">Server Status Snapshot</h6>
+                <div class="mb-2">
+                    <div class="d-flex justify-content-between small">
+                        <span><i class="fas fa-microchip me-1"></i> CPU Usage</span>
+                        <span>{{ "%.1f"|format(cpu_usage|float) }}%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-theme-specific" role="progressbar" style="width: {{ cpu_usage }}%;" aria-valuenow="{{ cpu_usage }}" aria-valuemin="0" aria-valuemax="100">{{ "%.0f"|format(cpu_usage|float) }}%</div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                     <div class="d-flex justify-content-between small">
+                        <span><i class="fas fa-memory me-1"></i> Memory Usage</span>
+                        <span>{{ "%.1f"|format(memory_usage|float) }}%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-theme-specific" role="progressbar" style="width: {{ memory_usage }}%;" aria-valuenow="{{ memory_usage }}" aria-valuemin="0" aria-valuemax="100">{{ "%.0f"|format(memory_usage|float) }}%</div>
+                    </div>
+                </div>
+                <div>
+                     <div class="d-flex justify-content-between small">
+                        <span><i class="fas fa-hdd me-1"></i> Disk Usage (Root)</span>
+                        <span>{{ "%.1f"|format(disk_usage|float) }}%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-theme-specific" role="progressbar" style="width: {{ disk_usage }}%;" aria-valuenow="{{ disk_usage }}" aria-valuemin="0" aria-valuemax="100">{{ "%.0f"|format(disk_usage|float) }}%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <p class="text-center mt-3 text-muted"><small>Enter your panel password to continue.</small></p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Optional: Focus the password field on load
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordField = document.getElementById('password');
+        if (passwordField) {
+            // passwordField.focus(); // Autofocus might be annoying for some users
+        }
+    });
+</script>
+{% endblock %}
