@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}Running Processes - Void Nodes Server Panel{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-tasks me-2"></i>Running Processes (Top 100 by CPU/Memory)
+    </div>
+    <div class="card-body" style="overflow-x: auto;"> {# Allow horizontal scroll for wide table #}
+        {% if process_data and not process_data[0].error %}
+            <table class="table table-striped table-hover table-sm small">
+                <thead>
+                    <tr>
+                        <th>PID</th>
+                        <th>Name</th>
+                        <th>User</th>
+                        <th>CPU %</th>
+                        <th>Mem %</th>
+                        <th>Status</th>
+                        <th>Started</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for proc in process_data %}
+                    <tr>
+                        <td>{{ proc.pid }}</td>
+                        <td>{{ proc.name }}</td>
+                        <td>{{ proc.username }}</td>
+                        <td>{{ proc.cpu_percent }}</td>
+                        <td>{{ proc.memory_percent }}</td>
+                        <td>{{ proc.status }}</td>
+                        <td>{{ proc.create_time }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% elif process_data and process_data[0].error %}
+            <div class="alert alert-danger">{{ process_data[0].error }}</div>
+        {% else %}
+            <p>No process data available or an error occurred.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
