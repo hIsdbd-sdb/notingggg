@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}CPU - Void Nodes Server Panel{% endblock %}
+
+{% block content %}
+<h1>CPU Information</h1>
+
+<!-- CPU Card -->
+<div class="card">
+    <div class="card-header">
+        CPU Details
+    </div>
+    <ul class="list-group list-group-flush">
+         <li class="list-group-item"><span>Model:</span> {{ cpu_data.model }}</li>
+        <li class="list-group-item"><span>Physical Cores:</span> {{ cpu_data.count }}</li>
+        <li class="list-group-item"><span>Logical Processors:</span> {{ cpu_data.logical_count }}</li>
+        <li class="list-group-item"><span>Current Frequency:</span> {{ "%.2f MHz"|format(cpu_data.freq) if cpu_data.freq != "N/A" else "N/A" }}</li>
+        <li class="list-group-item"><span>Overall Usage:</span> <span id="cpu-overall-usage">{{ "%.1f"|format(cpu_data.overall_usage_percent) }}%</span></li>         <li class="list-group-item"><span>Core Usage:</span>
+             <ul class="list-group list-group-flush mt-2">
+                 {% for usage in cpu_data.usage_percent %}
+                     <li class="list-group-item list-group-item-secondary py-1">Core {{ loop.index0 }}: <span id="cpu-core-{{ loop.index0 }}-usage">{{ "%.1f"|format(usage) }}%</span></li>
+                 {% endfor %}
+             </ul>
+         </li>
+    </ul>
+</div>
+
+<!-- Note: Dynamic updates would require a specific API endpoint for CPU info -->
+{% endblock %}
