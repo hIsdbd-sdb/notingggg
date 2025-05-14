@@ -1,0 +1,195 @@
+/* static/style.css */
+
+/* --- CSS Variables (Centralized for easier theming if not in theme.css) --- */
+:root {
+    --primary-accent: #0056b3; /* Example: Deeper blue for Void Nodes */
+    --primary-accent-hover: #004080;
+    --secondary-accent: #5a6268; /* A neutral grey */
+    --text-light: #f8f9fa;
+    --text-dark: #212529;
+    --background-light-page: #f4f7f6; /* Very light grey for page background */
+    --card-background-light: #ffffff;
+    --border-light: #e0e0e0; /* Lighter border */
+    --border-radius-sm: 0.3rem;
+    --border-radius-md: 0.6rem;
+    --border-radius-lg: 0.9rem; /* More rounded corners */
+
+    /* Shadows - adjust as needed */
+    --box-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --box-shadow-md: 0 5px 15px rgba(0, 0, 0, 0.08);
+    --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* --- Global Styles --- */
+body {
+    /* Font defined in layout.html's <style> block, but can be here too */
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    font-size: 1rem; /* Equivalent to 16px by default */
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--background-light-page); /* Default light background */
+    color: var(--text-dark); /* Default light mode text */
+    /* Transition for theme switching is in layout.html's <style> block */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 0.8em;
+    letter-spacing: -0.02em;
+    color: #333; /* Default heading color, theme.css can override */
+}
+h1 { font-size: 2.15rem; }
+h2 { font-size: 1.65rem; }
+h3 { font-size: 1.4rem; }
+
+
+a {
+    color: var(--primary-accent);
+    text-decoration: none; /* Cleaner look */
+    transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+a:hover {
+    color: var(--primary-accent-hover);
+    text-decoration: underline;
+}
+
+/* Custom Scrollbars (Webkit browsers) - Theme aware */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.03); /* Light track */
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #adb5bd; /* Neutral thumb */
+    border-radius: 10px;
+    border: 2px solid transparent; /* Creates padding around thumb */
+    background-clip: content-box;
+    transition: background-color 0.2s ease-in-out;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #868e96;
+}
+
+
+/* --- Navbar Enhancements (some already in layout.html's <style>) --- */
+.navbar {
+    /* box-shadow: 0 2px 10px rgba(0,0,0,0.08); */ /* Shadow from layout.html is fine */
+}
+.navbar-brand i {
+    transition: transform 0.3s ease; /* Icon animation */
+}
+.navbar-brand:hover i {
+    transform: rotate(15deg) scale(1.1);
+}
+.nav-link i {
+    margin-right: 0.4em;
+    width: 1.2em; /* For alignment */
+    text-align: center;
+}
+.dropdown-menu {
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-md);
+    border: 1px solid var(--border-light);
+    animation: fadeInDropdown 0.2s ease-out forwards; /* 'forwards' keeps the end state */
+}
+@keyframes fadeInDropdown {
+    from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.dropdown-item {
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+
+/* --- Card Styling (some already in layout.html's <style>) --- */
+.card {
+    border-radius: var(--border-radius-lg);
+    /* box-shadow and border are in layout.html's <style> for theme-awareness */
+    /* overflow: hidden; */ /* Good if card content might overflow rounded corners */
+}
+.card-header {
+    /* background-color from theme.css/Bootstrap */
+    border-bottom: 1px solid var(--border-light); /* Consistent border */
+}
+.list-group-item {
+    /* border-left/right/last-child styles from layout.html */
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+}
+.list-group-item span:first-child { /* The label, e.g., "OS:" */
+    color: var(--secondary-accent); /* Make labels slightly less prominent */
+    font-weight: 500;
+}
+
+
+/* --- Button Styling & Animations (some already in layout.html's <style>) --- */
+.btn {
+    /* border-radius, font-weight, padding from layout.html */
+    text-transform: none; /* Personal preference, Bootstrap defaults to uppercase for some */
+    letter-spacing: 0.01em;
+    /* transition from layout.html */
+    /* box-shadow from layout.html */
+}
+.btn i.fa-spin { /* For loading spinners in buttons */
+    margin-right: 0.5em;
+}
+
+
+/* --- Form Styling --- */
+.form-control, .form-select {
+    border-radius: var(--border-radius-md);
+    /* padding from layout.html */
+    /* transition from layout.html */
+    border: 1px solid #ced4da; /* Standard Bootstrap border */
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-accent);
+    /* box-shadow from layout.html, ensure it uses primary-accent */
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25); /* Use Bootstrap's primary RGB for focus */
+}
+.form-label {
+    font-weight: 500;
+}
+
+
+/* --- Table Styling --- */
+.table thead th {
+    font-weight: 600;
+    /* text-transform, letter-spacing from layout.html */
+    background-color: #e9ecef; /* Light header for light mode */
+    border-color: #dee2e6;
+}
+.table-hover tbody tr:hover {
+    background-color: rgba(0,0,0,0.04); /* Subtle hover for light mode table */
+}
+
+/* --- Alerts --- */
+.alert {
+    border-radius: var(--border-radius-md);
+    /* padding, font-weight from layout.html */
+    /* box-shadow from layout.html */
+}
+.alert-heading {
+    font-weight: 600;
+}
+
+
+/* --- Footer (styles in layout.html) --- */
+
+/* --- Page Content Animation (from layout.html) --- */
+/* .page-content {
+    animation: fadeInPage 0.6s ease-in-out;
+}
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+} */
+
+/* --- Specific class for SSH button if needed --- */
+.ssh-button-link {
+    /* display: inline-block; */ /* If you want to style it more like a button but it's an <a> */
+}
