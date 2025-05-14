@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}SSH Console - Void Nodes Server Panel{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-terminal me-2"></i>Server SSH Console
+    </div>
+    <div class="card-body">
+        <p>Click the button below to attempt to open an SSH session to this server (<strong>{{ ssh_user }}@{{ server_ip }}</strong>) in your local SSH client.</p>
+        <p>You will be prompted for the <strong>{{ ssh_user }}</strong> password by your SSH client.</p>
+
+        <div class="my-4 text-center">
+            <a href="ssh://{{ ssh_user }}@{{ server_ip }}" class="btn btn-primary btn-lg" role="button" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt me-2"></i>Connect via SSH
+            </a>
+        </div>
+
+        <div class="alert alert-info mt-4">
+            <strong>Note:</strong>
+            <ul>
+                <li>Your browser and operating system must be configured to handle <code>ssh://</code> links.</li>
+                <li>This will open a separate terminal application, not an in-browser console.</li>
+                <li>Ensure your SSH client is installed (e.g., Terminal on macOS/Linux, PuTTY or Windows Terminal with OpenSSH on Windows).</li>
+                <li>If the link doesn't work, you can manually open your SSH client and type: <code>ssh {{ ssh_user }}@{{ server_ip }}</code></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{# No specific JavaScript needed for this page beyond what layout.html provides #}
+{% endblock %}
