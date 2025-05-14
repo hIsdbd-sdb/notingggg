@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}System Logs - Void Nodes Server Panel{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-file-alt me-2"></i>{{ log_file_name }} (Last {{ log_lines|length }} lines)
+    </div>
+    <div class="card-body">
+        {% if log_lines %}
+            <pre class="bg-light p-3 rounded small" style="max-height: 600px; overflow-y: auto; white-space: pre-wrap; word-break: break-all;"><code>{% for line in log_lines %}{{ line }}{% endfor %}</code></pre>
+        {% else %}
+            <p>No log data to display or an error occurred.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
