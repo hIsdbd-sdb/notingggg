@@ -1,0 +1,177 @@
+/* static/theme.css */
+
+/* --- CSS Variables for Theming --- */
+:root {
+    /* Light Mode Defaults */
+    --body-bg-light: #ffffff;
+    --body-text-light: #000000;
+    --card-bg-light: #f9f9f9; /* Slightly off-white for cards */
+    --card-border-light: #e0e0e0;
+    --header-bg-light: #eeeeee;
+    --header-text-light: #000000;
+    --link-color-light: #000000;
+    --link-hover-light: #333333;
+    --button-primary-bg-light: #000000;
+    --button-primary-text-light: #ffffff;
+    --button-primary-border-light: #000000;
+    --progress-track-light: #e9ecef;
+    --progress-bar-light: #000000; /* Black progress bar in light mode */
+
+
+    /* Dark Mode Defaults */
+    --body-bg-dark: #000000;
+    --body-text-dark: #ffffff;
+    --card-bg-dark: #0d0d0d; /* Very dark grey, almost black */
+    --card-border-dark: #2a2a2a;
+    --header-bg-dark: #1a1a1a;
+    --header-text-dark: #ffffff;
+    --link-color-dark: #ffffff;
+    --link-hover-dark: #cccccc;
+    --button-primary-bg-dark: #ffffff;
+    --button-primary-text-dark: #000000;
+    --button-primary-border-dark: #ffffff;
+    --progress-track-dark: #2c2f33; /* Darker track */
+    --progress-bar-dark: #007bff; /* Blue progress bar in dark mode as requested */
+                                 /* Change to #9b59b6 for purple if preferred over blue */
+
+    --star-color-actual: #9b59b6;  /* Purple for stars */
+}
+
+/* --- Light Theme --- */
+body, html[data-bs-theme="light"] body {
+    background-color: var(--body-bg-light);
+    color: var(--body-text-light);
+}
+
+html[data-bs-theme="light"] .card {
+    background-color: var(--card-bg-light);
+    border: 1px solid var(--card-border-light);
+    color: var(--body-text-light);
+}
+
+html[data-bs-theme="light"] .card-header {
+    background-color: var(--header-bg-light);
+    color: var(--header-text-light);
+    border-bottom: 1px solid var(--card-border-light);
+}
+
+html[data-bs-theme="light"] .list-group-item {
+    background-color: var(--card-bg-light);
+    border-color: var(--card-border-light);
+    color: var(--body-text-light);
+}
+html[data-bs-theme="light"] .list-group-item-secondary {
+    background-color: #f0f0f0; /* Consistent with header */
+}
+
+html[data-bs-theme="light"] a {
+    color: var(--link-color-light);
+    text-decoration: none;
+}
+html[data-bs-theme="light"] a:hover {
+    color: var(--link-hover-light);
+    text-decoration: underline;
+}
+
+html[data-bs-theme="light"] .btn-primary {
+    background-color: var(--button-primary-bg-light);
+    color: var(--button-primary-text-light);
+    border-color: var(--button-primary-border-light);
+}
+html[data-bs-theme="light"] .btn-primary:hover { opacity: 0.85; }
+
+html[data-bs-theme="light"] .table th, html[data-bs-theme="light"] .table td { border-color: var(--card-border-light); }
+html[data-bs-theme="light"] .table thead th { background-color: var(--header-bg-light); color: var(--header-text-light); }
+
+/* --- Dark Theme Styles --- */
+body.dark-mode, html[data-bs-theme="dark"] body {
+    background-color: var(--body-bg-dark);
+    color: var(--body-text-dark);
+}
+
+body.dark-mode .card, html[data-bs-theme="dark"] .card {
+    background-color: var(--card-bg-dark);
+    border: 1px solid var(--card-border-dark);
+    color: var(--body-text-dark);
+}
+
+body.dark-mode .card-header, html[data-bs-theme="dark"] .card-header {
+    background-color: var(--header-bg-dark);
+    color: var(--header-text-dark);
+    border-bottom: 1px solid var(--card-border-dark);
+}
+
+body.dark-mode .list-group-item, html[data-bs-theme="dark"] .list-group-item {
+    background-color: var(--card-bg-dark);
+    border-color: var(--card-border-dark);
+    color: var(--body-text-dark);
+}
+body.dark-mode .list-group-item-secondary, html[data-bs-theme="dark"] .list-group-item-secondary {
+    background-color: #181818; /* Slightly different from card bg */
+}
+
+body.dark-mode a, html[data-bs-theme="dark"] a {
+    color: var(--link-color-dark);
+    text-decoration: none;
+}
+body.dark-mode a:hover, html[data-bs-theme="dark"] a:hover {
+    color: var(--link-hover-dark);
+    text-decoration: underline;
+}
+
+body.dark-mode .btn-primary, html[data-bs-theme="dark"] .btn-primary {
+    background-color: var(--button-primary-bg-dark);
+    color: var(--button-primary-text-dark);
+    border-color: var(--button-primary-border-dark);
+}
+body.dark-mode .btn-primary:hover, html[data-bs-theme="dark"] .btn-primary:hover { opacity: 0.85; }
+
+/* Navbar specific to dark theme (it's already .bg-dark so Bootstrap handles much of it) */
+body.dark-mode .navbar.bg-dark, html[data-bs-theme="dark"] .navbar.bg-dark {
+    border-bottom: 1px solid var(--card-border-dark); /* Add a subtle separator */
+}
+
+/* Forms in dark mode */
+body.dark-mode .form-control, html[data-bs-theme="dark"] .form-control,
+body.dark-mode .form-select, html[data-bs-theme="dark"] .form-select {
+    background-color: #0a0a0a; /* Very dark inputs */
+    color: var(--body-text-dark);
+    border-color: var(--card-border-dark);
+}
+body.dark-mode .form-control::placeholder, html[data-bs-theme="dark"] .form-control::placeholder { color: #666; }
+body.dark-mode .form-control:focus, html[data-bs-theme="dark"] .form-control:focus,
+body.dark-mode .form-select:focus, html[data-bs-theme="dark"] .form-select:focus {
+    border-color: var(--star-color-actual); /* Purple focus to match stars */
+    box-shadow: 0 0 0 0.25rem rgba(155, 89, 182, 0.25); /* Lighter purple shadow */
+    background-color: #0a0a0a; /* Keep bg on focus */
+    color: var(--body-text-dark);
+}
+body.dark-mode .form-label, html[data-bs-theme="dark"] .form-label { color: #ccc; }
+
+/* Footer in dark mode */
+html[data-bs-theme="dark"] .footer, body.dark-mode .footer {
+    border-top-color: var(--card-border-dark);
+    color: #888; /* Lighter grey footer text */
+}
+
+/* Scrollbars for dark mode */
+html[data-bs-theme="dark"] ::-webkit-scrollbar-track, body.dark-mode ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+html[data-bs-theme="dark"] ::-webkit-scrollbar-thumb, body.dark-mode ::-webkit-scrollbar-thumb { background: #222; }
+html[data-bs-theme="dark"] ::-webkit-scrollbar-thumb:hover, body.dark-mode ::-webkit-scrollbar-thumb:hover { background: #333; }
+
+/* Table in dark mode */
+body.dark-mode .table, html[data-bs-theme="dark"] .table { color: var(--table-text-dark); }
+body.dark-mode .table th, body.dark-mode .table td,
+html[data-bs-theme="dark"] .table th, html[data-bs-theme="dark"] .table td { border-color: var(--card-border-dark); }
+body.dark-mode .table thead th, html[data-bs-theme="dark"] .table thead th { background-color: var(--header-bg-dark); color: var(--header-text-dark); }
+body.dark-mode .table-striped > tbody > tr:nth-of-type(odd) > *,
+html[data-bs-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > * { --bs-table-accent-bg: var(--table-striped-bg-dark); color: var(--table-text-dark); }
+body.dark-mode .table-hover > tbody > tr:hover > *,
+html[data-bs-theme="dark"] .table-hover > tbody > tr:hover > * { --bs-table-accent-bg: rgba(255, 255, 255, 0.025); color: var(--table-text-dark); }
+
+/* Progress bars theming (can also be styled in login.html's <style> block directly) */
+html[data-bs-theme="light"] .progress { background-color: var(--progress-track-light); }
+html[data-bs-theme="light"] .progress-bar.bg-theme-specific { background-color: var(--progress-bar-light) !important; color: white; }
+
+html[data-bs-theme="dark"] .progress { background-color: var(--progress-track-dark); }
+html[data-bs-theme="dark"] .progress-bar.bg-theme-specific { background-color: var(--progress-bar-dark) !important; color: white; }
